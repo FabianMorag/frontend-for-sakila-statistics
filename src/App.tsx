@@ -1,3 +1,5 @@
+import { NavLink, Outlet } from "react-router";
+
 export default function App() {
   return (
     <div className="drawer lg:drawer-open">
@@ -11,9 +13,10 @@ export default function App() {
           >
             <span className="icon-[octicon--sidebar-collapse-24] text-2xl" />
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="px-4">SAKILA</div>
         </nav>
-        <div className="p-4">Page Content</div>
+
+        <Outlet />
       </div>
 
       <div className="is-drawer-close:overflow-visible drawer-side">
@@ -25,23 +28,25 @@ export default function App() {
         <div className="flex flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64 min-h-full">
           <ul className="w-full menu grow">
             <li>
-              <button
+              <NavLink
+                to="/"
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Homepage"
               >
                 <span className="icon-[fluent--home-24-filled]" />
                 <span className="is-drawer-close:hidden">Homepage</span>
-              </button>
+              </NavLink>
             </li>
 
             <li>
-              <button
+              <NavLink
+                to="/films"
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
-                data-tip="Settings"
+                data-tip="Films"
               >
                 <span className="icon-[codicon--settings]" />
-                <span className="is-drawer-close:hidden">Settings</span>
-              </button>
+                <span className="is-drawer-close:hidden">Films</span>
+              </NavLink>
             </li>
           </ul>
         </div>
