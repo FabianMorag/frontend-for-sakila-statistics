@@ -11,7 +11,7 @@ export default function App() {
       )}
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <nav className="fixed bg-base-300 w-full navbar">
+        <nav className="bg-base-300 w-full navbar">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
