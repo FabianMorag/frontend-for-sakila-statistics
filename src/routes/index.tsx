@@ -1,14 +1,34 @@
 import { createBrowserRouter } from "react-router";
-import Home from "@/routes/Home";
-import Films from "@/routes/Films";
-import App from "@/App";
+import Layout from "@/App";
 
 export const router = createBrowserRouter([
   {
-    Component: App,
+    Component: Layout,
     children: [
-      { path: "/", Component: Home },
-      { path: "films", Component: Films },
+      {
+        index: true,
+        lazy: {
+          Component: async () => (await import("@/routes/Home")).default,
+        },
+      },
+      {
+        path: "films",
+        lazy: {
+          Component: async () => (await import("@/routes/Films")).default,
+        },
+      },
+      {
+        path: "reports",
+        lazy: {
+          Component: async () => (await import("@/routes/Reports")).default,
+        },
+      },
+      {
+        path: "customers",
+        lazy: {
+          Component: async () => (await import("@/routes/Customers")).default,
+        },
+      },
     ],
   },
 ]);

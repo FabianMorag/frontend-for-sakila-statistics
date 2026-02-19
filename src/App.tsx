@@ -5,15 +5,15 @@ export default function App() {
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <nav className="bg-base-300 w-full navbar">
+        <nav className="fixed bg-base-300 w-full navbar">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
-            <span className="icon-[octicon--sidebar-collapse-24] text-2xl" />
+            <span className="icon-[octicon--sidebar-collapse-24] text-xl" />
           </label>
-          <div className="px-4">SAKILA</div>
+          <span className="px-4 font-semibold">Sakila Statistics</span>
         </nav>
 
         <Outlet />
@@ -44,8 +44,30 @@ export default function App() {
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Films"
               >
-                <span className="icon-[codicon--settings]" />
+                <span className="icon-[fluent--filmstrip-play-32-filled]" />
                 <span className="is-drawer-close:hidden">Films</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/reports"
+                className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
+                data-tip="Reports"
+              >
+                <span className="icon-[bxs--report]" />
+                <span className="is-drawer-close:hidden">Reports</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/customers"
+                className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
+                data-tip="Customers"
+              >
+                <span className="icon-[solar--user-bold]" />
+                <span className="is-drawer-close:hidden">Customers</span>
               </NavLink>
             </li>
           </ul>
