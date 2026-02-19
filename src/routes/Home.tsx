@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function Home() {
   return (
-    <div className="bg-base-200 min-h-screen hero">
+    <main className="bg-base-200 min-h-screen hero">
       <div className="text-center hero-content">
         <div className="max-w-lg">
           <h1 className="font-bold text-5xl">Welcome to Sakila App</h1>
@@ -34,6 +34,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

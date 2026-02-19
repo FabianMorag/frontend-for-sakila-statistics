@@ -1,8 +1,14 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigation } from "react-router";
 
 export default function App() {
+  const { state } = useNavigation();
+  const isLoading = state === "loading";
+
   return (
     <div className="drawer lg:drawer-open">
+      {isLoading && (
+        <progress className="z-20 absolute w-full progress-primary progress" />
+      )}
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <nav className="fixed bg-base-300 w-full navbar">
