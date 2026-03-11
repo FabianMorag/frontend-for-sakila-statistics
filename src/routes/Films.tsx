@@ -1,9 +1,8 @@
-import useSWR from 'swr'
 import { getFilms } from '@/services/films'
 import type { Film } from '@/types/films'
 import { Link } from 'react-router'
-import { useEffect, useState } from 'react'
-import { useGlobalLoading } from '@/stores/useGlobalLoading'
+import { useState } from 'react'
+import { useGlobalFetch } from '@/hooks/useGlobalFetch'
 
 export default function Films() {
   return (
@@ -18,13 +17,10 @@ export default function Films() {
 
 function FilmsDashboard() {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const { data, error, isLoading } = useSWR(
+  const { data, error } = useGlobalFetch(
     `/films?limit=6&page=${currentPage}`,
     getFilms
   )
-  const setGlobalLoading = useGlobalLoading(state => state.setGlobalLoading)
-
-  useEffect(() => setGlobalLoading(isLoading), [isLoading])
 
   if (error) return <p className="text-center">Error loading films</p>
   if (!data?.films.length) return <p className="text-center">No data</p>

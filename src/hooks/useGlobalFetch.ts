@@ -7,6 +7,7 @@ export const useGlobalFetch = <T>(
   fn: (url: string) => Promise<T>
 ) => {
   const { data, error, isLoading } = useSWR(url, fn)
+
   const setGlobalLoading = useGlobalLoading(state => state.setGlobalLoading)
   useEffect(() => setGlobalLoading(isLoading), [isLoading])
 
