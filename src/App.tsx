@@ -1,12 +1,14 @@
-import { NavLink, Outlet, useNavigation } from "react-router";
+import { NavLink, Outlet, useNavigation } from 'react-router'
+import { useGlobalLoading } from './stores/useGlobalLoading'
 
 export default function App() {
-  const { state } = useNavigation();
-  const isLoading = state === "loading";
+  const { state } = useNavigation()
+  const isLoading = state === 'loading'
+  const globalLoading = useGlobalLoading(state => state.globalLoading)
 
   return (
     <div className="drawer lg:drawer-open">
-      {isLoading && (
+      {(isLoading || globalLoading) && (
         <progress className="z-20 absolute w-full progress-primary progress" />
       )}
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -80,5 +82,5 @@ export default function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,9 @@
-import useSWR from "swr";
-import { getFilms } from "@/services/films";
-import type { Film } from "@/types/films";
-import { Link } from "react-router";
-import { useState } from "react";
+import useSWR from 'swr'
+import { getFilms } from '@/services/films'
+import type { Film } from '@/types/films'
+import { Link } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useGlobalLoading } from '@/stores/useGlobalLoading'
 
 export default function Films() {
   return (
@@ -12,19 +13,21 @@ export default function Films() {
         <FilmsDashboard />
       </section>
     </main>
-  );
+  )
 }
 
 function FilmsDashboard() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const { data, error, isLoading } = useSWR(
     `/films?limit=6&page=${currentPage}`,
-    getFilms,
-  );
+    getFilms
+  )
+  const setGlobalLoading = useGlobalLoading(state => state.setGlobalLoading)
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
-  if (error) return <p className="text-center">Error loading films</p>;
-  if (!data?.films.length) return <p className="text-center">No data</p>;
+  useEffect(() => setGlobalLoading(isLoading), [isLoading])
+
+  if (error) return <p className="text-center">Error loading films</p>
+  if (!data?.films.length) return <p className="text-center">No data</p>
 
   return (
     <>
@@ -34,7 +37,7 @@ function FilmsDashboard() {
           title, release year, description, and a placeholder image.
         </li>
 
-        {data.films.map((film) => (
+        {data.films.map(film => (
           <FilmCard key={film.film_id} {...film} />
         ))}
       </ul>
@@ -45,7 +48,7 @@ function FilmsDashboard() {
         setCurrentPage={setCurrentPage}
       />
     </>
-  );
+  )
 }
 
 function FilmCard({ film_id, title, release_year, description }: Film) {
@@ -66,7 +69,7 @@ function FilmCard({ film_id, title, release_year, description }: Film) {
       <p className="text-xs list-col-wrap">{description}</p>
       <span className="icon-[fluent--arrow-circle-right-24-filled] text-3xl" />
     </Link>
-  );
+  )
 }
 
 function Pagination({
@@ -74,9 +77,9 @@ function Pagination({
   totalPages,
   setCurrentPage,
 }: {
-  page: number;
-  totalPages: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number
+  totalPages: number
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }) {
   return (
     <div className="flex justify-center mt-4 join">
@@ -116,5 +119,5 @@ function Pagination({
         </button>
       )}
     </div>
-  );
+  )
 }
