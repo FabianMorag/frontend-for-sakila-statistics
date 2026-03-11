@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router";
-import Layout from "@/App";
+import { createBrowserRouter } from 'react-router'
+import Layout from '@/App'
 
 export const router = createBrowserRouter([
   {
@@ -8,27 +8,27 @@ export const router = createBrowserRouter([
       {
         index: true,
         lazy: {
-          Component: async () => (await import("@/routes/Home")).default,
+          Component: async () => (await import('@/routes/Home')).default,
         },
       },
       {
-        path: "films",
+        path: 'films',
         lazy: {
-          Component: async () => (await import("@/routes/Films")).default,
+          Component: async () => (await import('@/routes/Films')).default,
         },
       },
       {
-        path: "reports",
+        path: 'reports',
         lazy: {
-          Component: async () => (await import("@/routes/Reports")).default,
+          Component: async () => (await import('@/routes/Reports')).default,
         },
       },
       {
-        path: "customers",
+        path: 'customers',
         lazy: {
-          Component: async () => (await import("@/routes/Customers")).default,
+          Component: async () => (await import('@/routes/Customers')).default,
         },
       },
     ],
   },
-]);
+])
