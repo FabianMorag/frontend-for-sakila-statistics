@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { getFilms } from "@/services/films";
 import type { Film } from "@/types/films";
 import { Link } from "react-router";
+import { useState } from "react";
 
 export default function Films() {
   return (
@@ -15,23 +16,35 @@ export default function Films() {
 }
 
 function FilmsDashboard() {
-  const { data, error, isLoading } = useSWR("/films?limit=6", getFilms);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { data, error, isLoading } = useSWR(
+    `/films?limit=6&page=${currentPage}`,
+    getFilms,
+  );
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading films</div>;
-  if (!data) return <div>No data</div>;
+  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (error) return <p className="text-center">Error loading films</p>;
+  if (!data?.films.length) return <p className="text-center">No data</p>;
 
   return (
-    <ul className="bg-base-100 shadow-md rounded-box list">
-      <li className="opacity-60 p-4 pb-2 text-xs tracking-wide">
-        List of films from the Sakila database. Each film entry includes a
-        title, release year, description, and a placeholder image.
-      </li>
+    <>
+      <ul className="bg-base-100 shadow-md rounded-box list">
+        <li className="opacity-60 p-4 pb-2 text-xs tracking-wide">
+          List of films from the Sakila database. Each film entry includes a
+          title, release year, description, and a placeholder image.
+        </li>
 
-      {data.films.map((film) => (
-        <FilmCard key={film.film_id} {...film} />
-      ))}
-    </ul>
+        {data.films.map((film) => (
+          <FilmCard key={film.film_id} {...film} />
+        ))}
+      </ul>
+
+      <Pagination
+        page={currentPage}
+        totalPages={data.meta.totalPages}
+        setCurrentPage={setCurrentPage}
+      />
+    </>
   );
 }
 
@@ -53,5 +66,55 @@ function FilmCard({ film_id, title, release_year, description }: Film) {
       <p className="text-xs list-col-wrap">{description}</p>
       <span className="icon-[fluent--arrow-circle-right-24-filled] text-3xl" />
     </Link>
+  );
+}
+
+function Pagination({
+  page,
+  totalPages,
+  setCurrentPage,
+}: {
+  page: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  return (
+    <div className="flex justify-center mt-4 join">
+      {page >= 2 && (
+        <button onClick={() => setCurrentPage(1)} className="join-item btn">
+          1
+        </button>
+      )}
+      {page >= 3 && (
+        <button
+          onClick={() => setCurrentPage(page - 1)}
+          className="join-item btn"
+        >
+          {page - 1}
+        </button>
+      )}
+      <button
+        onClick={() => setCurrentPage(page)}
+        className="join-item btn btn-disabled"
+      >
+        {page}
+      </button>
+      {page < totalPages - 1 && (
+        <button
+          onClick={() => setCurrentPage(page + 1)}
+          className="join-item btn"
+        >
+          {page + 1}
+        </button>
+      )}
+      {page < totalPages && (
+        <button
+          onClick={() => setCurrentPage(totalPages)}
+          className="join-item btn"
+        >
+          {totalPages}
+        </button>
+      )}
+    </div>
   );
 }
