@@ -19,5 +19,10 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      "react-hooks/exhaustive-deps": "off",
+      "arrow-body-style": ["error", "as-needed"],
+      "no-console": "warn",
+    },
   },
 ]);
