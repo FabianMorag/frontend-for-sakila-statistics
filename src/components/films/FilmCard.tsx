@@ -8,7 +8,7 @@ export default function FilmCard({
   description,
 }: Film) {
   return (
-    <Link key={film_id} to={`/films/${film_id}`} className="list-row">
+    <Link to={`/films/${film_id}`} className="list-row">
       <div>
         <img
           className="rounded-box size-10"
