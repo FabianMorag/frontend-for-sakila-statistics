@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useSearchParams } from 'react-router'
 import { useGlobalFetch } from '@/hooks/useGlobalFetch'
 import { getFilms } from '@/services/films'
 import FilmCard from '@/components/films/FilmCard'
 import Pagination from '@/components/films/Pagination'
 
 export default function FilmsDashboard() {
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
+  const currentPage = Number(searchParams.get('page')) || 1
+
   const { data, error } = useGlobalFetch(
     `/films?limit=6&page=${currentPage}`,
     getFilms
   )
+
+  const setCurrentPage = (page: number) => {
+    setSearchParams({ page: page.toString() })
+  }
 
   if (error) return <p className="text-center">Error loading films</p>
   if (!data?.films.length) return

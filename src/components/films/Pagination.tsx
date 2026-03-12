@@ -5,7 +5,7 @@ export default function Pagination({
 }: {
   page: number
   totalPages: number
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+  setCurrentPage: (page: number) => void
 }) {
   return (
     <div className="flex justify-center mt-4 join">
