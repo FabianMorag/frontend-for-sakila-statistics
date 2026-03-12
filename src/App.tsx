@@ -19,7 +19,7 @@ export default function App() {
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
-            <span className="icon-[octicon--sidebar-collapse-24] text-xl" />
+            <span className="icon-[octicon--sidebar-collapse-24] text-2xl" />
           </label>
           <span className="px-4 font-semibold">Sakila Statistics</span>
         </nav>
@@ -41,7 +41,7 @@ export default function App() {
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Homepage"
               >
-                <span className="icon-[fluent--home-24-filled]" />
+                <span className="text-xl icon-[fluent--home-24-filled]" />
                 <span className="is-drawer-close:hidden">Homepage</span>
               </NavLink>
             </li>
@@ -52,7 +52,7 @@ export default function App() {
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Films"
               >
-                <span className="icon-[fluent--filmstrip-play-32-filled]" />
+                <span className="text-xl icon-[fluent--filmstrip-play-24-filled]" />
                 <span className="is-drawer-close:hidden">Films</span>
               </NavLink>
             </li>
@@ -63,7 +63,7 @@ export default function App() {
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Reports"
               >
-                <span className="icon-[bxs--report]" />
+                <span className="text-xl icon-[bxs--report]" />
                 <span className="is-drawer-close:hidden">Reports</span>
               </NavLink>
             </li>
@@ -74,7 +74,7 @@ export default function App() {
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
                 data-tip="Customers"
               >
-                <span className="icon-[solar--user-bold]" />
+                <span className="text-xl icon-[solar--user-bold]" />
                 <span className="is-drawer-close:hidden">Customers</span>
               </NavLink>
             </li>
