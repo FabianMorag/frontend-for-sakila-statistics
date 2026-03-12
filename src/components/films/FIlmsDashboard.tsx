@@ -3,15 +3,13 @@ import { useGlobalFetch } from '@/hooks/useGlobalFetch'
 import { getFilms } from '@/services/films'
 import FilmCard from '@/components/films/FilmCard'
 import Pagination from '@/components/films/Pagination'
+import { getFilmsKey } from '@/utils/urlKeys'
 
 export default function FilmsDashboard() {
   const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
   const currentPage = Number(searchParams.get('page')) || 1
 
-  const { data, error } = useGlobalFetch(
-    `/films?limit=6&page=${currentPage}`,
-    getFilms
-  )
+  const { data, error } = useGlobalFetch(getFilmsKey(currentPage), getFilms)
 
   const setCurrentPage = (page: number) => {
     setSearchParams({ page: page.toString() })

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import Layout from '@/App'
 import { getFilmDetails } from '@/services/films'
+import { getFilmDetailsKey } from '@/utils/urlKeys'
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
             loader: async ({ params }) => {
               const { id } = params
               if (!id) throw new Error('Film ID is required')
-              return await getFilmDetails(id)
+              return await getFilmDetails(getFilmDetailsKey(id))
             },
             lazy: {
               Component: async () =>
