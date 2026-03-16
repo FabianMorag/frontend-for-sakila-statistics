@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router'
 import { useGlobalFetch } from '@/hooks/useGlobalFetch'
 import { getFilms } from '@/services/films'
-import FilmCard from '@/components/films/FilmCard'
+import FilmRow from '@/components/films/FilmRow'
 import Pagination from '@/components/films/Pagination'
 import { getFilmsKey } from '@/utils/urlKeys'
 
@@ -20,14 +20,14 @@ export default function FilmsDashboard() {
 
   return (
     <>
-      <ul className="bg-base-100 shadow-md rounded-box list">
+      <ul className="bg-base-200 shadow-md rounded-box list">
         <li className="opacity-60 p-4 pb-2 text-xs tracking-wide">
           List of films from the Sakila database. Each film entry includes a
           title, release year, description, and a placeholder image.
         </li>
 
         {data.films.map(film => (
-          <FilmCard key={film.film_id} {...film} />
+          <FilmRow key={film.film_id} {...film} />
         ))}
       </ul>
 

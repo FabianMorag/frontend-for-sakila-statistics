@@ -32,7 +32,7 @@ export default function FilmDetails() {
         </ul>
       </div>
 
-      <div className="bg-base-200 shadow-xl card">
+      <div className="bg-base-200 shadow-lg card">
         <figure className="px-6 pt-6">
           <div className="flex justify-center items-center bg-linear-to-br from-primary/30 to-secondary/30 rounded-xl w-full h-48">
             <span className="text-4xl icon-[meteor-icons--film]" />
