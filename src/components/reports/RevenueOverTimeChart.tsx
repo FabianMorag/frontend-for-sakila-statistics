@@ -9,13 +9,14 @@ export default function RevenueOverTimeChart({
 }: {
   chartProps: Props
 }) {
-  const { data, error } = useGlobalFetch(
+  const { data, isLoading, error } = useGlobalFetch(
     getRevenueOverTimeKey(),
     getRevenueOverTime
   )
 
   if (error) return <p className="text-center">Error data reports</p>
-  if (!data?.length) return
+  if (isLoading) return <div className="w-full h-112.5 skeleton"></div>
+  if (!data?.length) return <p className="text-center">No data available</p>
 
   const { date, revenues } = data.reduce(
     (acc, item) => {

@@ -8,12 +8,13 @@ export default function TopCategoriesChart({
 }: {
   chartProps: Props
 }) {
-  const { data, error } = useGlobalFetch(
+  const { data, isLoading, error } = useGlobalFetch(
     getTopCategoriesKey(),
     getTopCategories
   )
 
   if (error) return <p className="text-center">Error data reports</p>
+  if (isLoading) return <div className="mb-14 w-full h-112.5 skeleton"></div>
   if (!data?.length) return
 
   const { names, revenues } = data.reduce(

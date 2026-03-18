@@ -11,5 +11,5 @@ export const useGlobalFetch = <T>(
   const setGlobalLoading = useGlobalLoading(state => state.setGlobalLoading)
   useEffect(() => setGlobalLoading(isLoading), [isLoading])
 
-  return { data, error }
+  return { data, isLoading, error }
 }
