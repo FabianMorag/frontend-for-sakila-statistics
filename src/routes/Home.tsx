@@ -20,7 +20,7 @@ export default function Home() {
               Films
             </Link>
             <Link
-              to="/reports"
+              to="/revenue"
               className="lg:flex-1 btn btn-wide join-item btn-primary"
             >
               Reports

@@ -59,12 +59,12 @@ export default function App() {
 
             <li>
               <NavLink
-                to="/reports"
+                to="/revenue"
                 className="is-drawer-close:tooltip-right is-drawer-close:tooltip"
-                data-tip="Reports"
+                data-tip="Revenue Reports"
               >
                 <span className="text-xl icon-[bxs--report]" />
-                <span className="is-drawer-close:hidden">Reports</span>
+                <span className="is-drawer-close:hidden"> Revenue reports</span>
               </NavLink>
             </li>
 

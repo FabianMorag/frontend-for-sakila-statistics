@@ -39,7 +39,7 @@ const chartProps: Props = {
   },
 }
 
-export default function Reports() {
+export default function Revenue() {
   return (
     <main className="mx-auto p-6 max-w-5xl">
       <header className="mb-14">
