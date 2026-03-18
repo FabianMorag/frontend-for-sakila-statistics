@@ -1,48 +1,50 @@
 import { useGlobalFetch } from '@/hooks/useGlobalFetch'
-import { getTopCategoriesKey } from '@/utils/urlKeys'
-import { getTopCategories } from '@/services/reports'
+import { getRevenueOverTimeKey } from '@/utils/urlKeys'
+import { getRevenueOverTime } from '@/services/reports'
 import Chart, { type Props } from 'react-apexcharts'
+import { type ApexOptions } from 'apexcharts'
 
-export default function TopCategoriesChart({
+export default function RevenueOverTimeChart({
   chartProps,
 }: {
   chartProps: Props
 }) {
   const { data, error } = useGlobalFetch(
-    getTopCategoriesKey(),
-    getTopCategories
+    getRevenueOverTimeKey(),
+    getRevenueOverTime
   )
 
   if (error) return <p className="text-center">Error data reports</p>
   if (!data?.length) return
 
-  const { names, revenues } = data.reduce(
+  const { date, revenues } = data.reduce(
     (acc, item) => {
-      acc.names.push(item.name)
-      acc.revenues.push(item.total_revenue)
+      acc.date.push(item.date)
+      acc.revenues.push(Number(item.total_revenue))
       return acc
     },
-    { names: [] as string[], revenues: [] as number[] }
+    { date: [] as string[], revenues: [] as number[] }
   )
 
-  const options = {
+  const options: ApexOptions = {
     ...chartProps.options,
     xaxis: {
-      categories: names,
+      categories: date,
+      labels: {
+        datetimeUTC: true,
+        formatter: (value: string) => value.slice(0, 7),
+      },
     },
   }
 
-  const series = [{ name: 'Revenue', data: revenues }]
+  const series = [{ name: 'Revenue over time', data: revenues }]
 
   return (
     <section className="mb-14">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-gray-200 text-xl tracking-wide">
-          Revenue by Category
+          Revenue over time
         </h2>
-        <span className="bg-blue-500/10 px-3 py-1 border border-blue-500/20 rounded-full font-medium text-blue-400 text-sm">
-          All Time
-        </span>
       </div>
 
       <Chart {...chartProps} options={options} series={series} />
