@@ -64,7 +64,7 @@ export default function App() {
                 data-tip="Revenue Reports"
               >
                 <span className="text-xl icon-[bxs--report]" />
-                <span className="is-drawer-close:hidden"> Revenue reports</span>
+                <span className="is-drawer-close:hidden"> Revenue</span>
               </NavLink>
             </li>
 
