@@ -42,7 +42,9 @@ export default function App() {
                 data-tip="Homepage"
               >
                 <span className="text-xl icon-[fluent--home-24-filled]" />
-                <span className="is-drawer-close:hidden">Homepage</span>
+                <span className="is-drawer-close:hidden whitespace-nowrap">
+                  Homepage
+                </span>
               </NavLink>
             </li>
 
@@ -53,7 +55,9 @@ export default function App() {
                 data-tip="Films"
               >
                 <span className="text-xl icon-[fluent--filmstrip-play-24-filled]" />
-                <span className="is-drawer-close:hidden">Films</span>
+                <span className="is-drawer-close:hidden whitespace-nowrap">
+                  Films
+                </span>
               </NavLink>
             </li>
 
@@ -64,7 +68,9 @@ export default function App() {
                 data-tip="Revenue Reports"
               >
                 <span className="text-xl icon-[bxs--report]" />
-                <span className="is-drawer-close:hidden"> Revenue</span>
+                <span className="is-drawer-close:hidden whitespace-nowrap">
+                  Revenue reports
+                </span>
               </NavLink>
             </li>
 
@@ -75,7 +81,9 @@ export default function App() {
                 data-tip="Customers"
               >
                 <span className="text-xl icon-[solar--user-bold]" />
-                <span className="is-drawer-close:hidden">Customers</span>
+                <span className="is-drawer-close:hidden whitespace-nowrap">
+                  Customers list
+                </span>
               </NavLink>
             </li>
           </ul>
