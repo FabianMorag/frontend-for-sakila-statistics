@@ -5,14 +5,11 @@ export default function Customers() {
   return (
     <main className="mx-auto p-6 max-w-7xl">
       <header className="mb-10">
-        <h1 className="mb-2 font-bold text-white text-4xl">
-          Customer Insights
-        </h1>
+        <h1 className="mb-2 font-bold text-white text-4xl">Customers</h1>
         <p className="max-w-3xl text-gray-400 text-lg">
-          Explore our customer base with detailed insights into demographics,
-          rental history, and spending patterns. Use this information to tailor
-          marketing strategies, improve customer retention, and enhance the
-          overall rental experience.
+          Browse the complete customer directory and identify our top spenders.
+          Use this overview to manage your customer base and track our most
+          valuable patrons.
         </p>
       </header>
 
