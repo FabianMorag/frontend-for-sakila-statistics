@@ -1,33 +1,78 @@
+import { useGlobalFetch } from '@/hooks/useGlobalFetch'
+import { getTopCustomerList } from '@/services/customers'
+import type { TopCustomer } from '@/types/customer'
+import { getTopCustomerKey } from '@/utils/urlKeys'
+
 export default function TopSpenders() {
   return (
     <aside className="flex flex-col gap-6">
-      <div className="bg-linear-to-br from-primary/20 to-secondary/20 p-6 border border-secondary/40 rounded-xl h-full">
+      <div className="bg-linear-to-br from-primary/20 to-secondary/20 p-6 border border-secondary/40 rounded-xl">
         <h2 className="flex items-center gap-2 mb-4 font-semibold text-indigo-200 text-xl">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-yellow-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-            />
-          </svg>
+          <span className="icon-[twemoji--sparkles]" />
           Top Spenders
         </h2>
         <p className="mb-6 text-indigo-200/70 text-sm">
-          Nuestros clientes más valiosos según el total gastado.
+          Our most valuable customers based on total amount spent.
         </p>
 
-        {/* TODO: Reemplazar por tu componente <TopCustomers /> (Ranking o Cards) */}
-        <div className="flex justify-center items-center border-2 border-indigo-500/50 border-dashed rounded-lg w-full h-64 text-indigo-300/50">
-          [ Componente: Top Customers List ]
-        </div>
+        <TopSpenderTable />
       </div>
     </aside>
+  )
+}
+
+function TopSpenderTable() {
+  const { data, isLoading, error } = useGlobalFetch(
+    getTopCustomerKey(),
+    getTopCustomerList
+  )
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="w-full h-16 skeleton" />
+        <div className="w-full h-16 skeleton" />
+        <div className="w-full h-16 skeleton" />
+        <div className="w-full h-16 skeleton" />
+        <div className="w-full h-16 skeleton" />
+      </div>
+    )
+  }
+  if (error)
+    return <div className="text-error-content">Error loading customers</div>
+  if (!data) return
+
+  return (
+    <div className="flex flex-col gap-4">
+      {data.map(customer => (
+        <TopCustomerRow customer={customer} />
+      ))}
+    </div>
+  )
+}
+
+function TopCustomerRow({ customer }: { customer: TopCustomer }) {
+  const initials = `${customer.first_name.charAt(0)}${customer.last_name.charAt(0)}`
+
+  return (
+    <div className="flex items-center gap-3 bg-gray-900/50 hover:bg-gray-800 p-3 border border-secondary/20 rounded-xl transition-colors cursor-default">
+      <div className="avatar placeholder">
+        <div className="flex justify-center items-center bg-secondary/20 rounded-full w-10 h-10 font-bold text-secondary-content text-sm">
+          <span>{initials}</span>
+        </div>
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <h3 className="font-semibold text-white text-sm truncate">
+          {customer.first_name} {customer.last_name}
+        </h3>
+      </div>
+
+      <div className="text-right">
+        <p className="font-bold text-emerald-400 text-sm">
+          ${customer.total_spent}
+        </p>
+      </div>
+    </div>
   )
 }
