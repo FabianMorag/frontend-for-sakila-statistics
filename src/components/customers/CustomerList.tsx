@@ -2,6 +2,7 @@ import { useGlobalFetch } from '@/hooks/useGlobalFetch'
 import { getCustomerList } from '@/services/customers'
 import type { Customer } from '@/types/customer'
 import { getCustomerListKey } from '@/utils/urlKeys'
+import { Link } from 'react-router'
 
 export default function CustomerList() {
   return (
@@ -50,7 +51,10 @@ function CustomerRow({ customer }: { customer: Customer }) {
   const initials = `${customer.first_name.charAt(0)}${customer.last_name.charAt(0)}`
 
   return (
-    <div className="flex items-center gap-4 bg-gray-900/50 hover:bg-gray-800 p-4 border border-gray-700/50 rounded-xl transition-colors cursor-pointer">
+    <Link
+      to={`/customers/${customer.customer_id}`}
+      className="flex items-center gap-4 bg-gray-900/50 hover:bg-gray-800 p-4 border border-gray-700/50 rounded-xl transition-colors cursor-pointer"
+    >
       <div className="avatar placeholder">
         <div className="flex justify-center items-center bg-neutral rounded-full w-12 h-12 font-semibold text-neutral-content text-lg">
           <span>{initials}</span>
@@ -75,6 +79,6 @@ function CustomerRow({ customer }: { customer: Customer }) {
           </div>
         )}
       </div>
-    </div>
+    </Link>
   )
 }

@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router'
 import Layout from '@/App'
 import { getFilmDetails } from '@/services/films'
-import { getFilmDetailsKey } from '@/utils/urlKeys'
+import { getCustomerKey, getFilmDetailsKey } from '@/utils/urlKeys'
+import { getCustomerDetails } from '@/services/customers'
 
 export const router = createBrowserRouter([
   {
@@ -19,8 +20,7 @@ export const router = createBrowserRouter([
           {
             index: true,
             lazy: {
-              Component: async () =>
-                (await import('@/routes/films/Films')).default,
+              Component: async () => (await import('@/routes/Films')).default,
             },
           },
           {
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
             },
             lazy: {
               Component: async () =>
-                (await import('@/routes/films/FilmDetails')).default,
+                (await import('@/routes/Films/FilmDetails')).default,
             },
           },
         ],
@@ -45,9 +45,27 @@ export const router = createBrowserRouter([
       },
       {
         path: 'customers',
-        lazy: {
-          Component: async () => (await import('@/routes/Customers')).default,
-        },
+        children: [
+          {
+            index: true,
+            lazy: {
+              Component: async () =>
+                (await import('@/routes/Customers')).default,
+            },
+          },
+          {
+            path: ':id',
+            loader: async ({ params }) => {
+              const { id } = params
+              if (!id) throw new Error('Customer ID is required')
+              return await getCustomerDetails(getCustomerKey(id))
+            },
+            lazy: {
+              Component: async () =>
+                (await import('@/routes/Customers/CustomerDetails')).default,
+            },
+          },
+        ],
       },
     ],
   },
