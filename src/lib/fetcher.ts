@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API_URL } from '@/utils/apiUrl'
 
 export const fetcher = <T>(url: string): Promise<T> =>
-  axios.get<T>(`http://localhost:3000${url}`).then(res => res.data)
+  axios.get<T>(`${API_URL}${url}`).then(res => res.data)
